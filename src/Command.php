@@ -69,9 +69,10 @@ class Command extends BaseCommand
         if (isset($args['inputArg'])) {
             // Typecasts TmpFile to filename and escapes argument
             $this->addArg((string) $args['inputArg'], null, true);
-            unset($args['inputArg']);
+            //unset($args['inputArg']);  // unset from this array erases the linked file
         }
         foreach($args as $key=>$val) {
+            if ('inputArg' === $key) continue;
             if (is_numeric($key)) {
                 $this->addArg("--$val");
             } elseif (is_array($val)) {
